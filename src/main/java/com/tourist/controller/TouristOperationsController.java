@@ -36,6 +36,7 @@ public class TouristOperationsController {
 		System.out.println("Tourist details are " + result);
 		// return new ResponseEntity<String>(result, HttpStatus.CREATED);
 		return ResponseHandler.generateResponse("Successfully Tourist data inserted", HttpStatus.CREATED, result);
+		//return CommanRespones.builder().errorCode("500").errorMess(exception.getMessage()).status(false).build();
 	}
 
 	@GetMapping("/findAll")
