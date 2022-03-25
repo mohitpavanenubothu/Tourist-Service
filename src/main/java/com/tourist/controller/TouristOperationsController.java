@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tourist.client.IStudentServiceRestConsumer;
 import com.tourist.common.ResponseHandler;
 import com.tourist.entity.Tourist;
 import com.tourist.exception.TouristNotFoundException;
@@ -25,6 +26,9 @@ public class TouristOperationsController {
 
 	@Autowired
 	private ITouristService service;
+
+	@Autowired
+	private IStudentServiceRestConsumer consumer;
 
 	@PostMapping("/save")
 	public ResponseEntity<Object> saveTourist(@RequestBody Tourist tourist) throws Exception {
@@ -38,7 +42,9 @@ public class TouristOperationsController {
 	public ResponseEntity<?> displayTourists() throws Exception {
 		List<Tourist> list = service.fetchAllTourists();
 		// return new ResponseEntity<List<Tourist>>(list, HttpStatus.OK);
-		return ResponseHandler.generateResponse("All Tourist Details are", HttpStatus.OK, list);
+		String result = consumer.fetchStudentDetails();
+		return ResponseHandler.generateResponse("All Tourist and Student Details are", HttpStatus.OK,
+				list + "Student data is" + result);
 	}
 
 	@GetMapping("/find/{id}")
