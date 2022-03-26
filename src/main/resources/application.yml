@@ -1,18 +1,12 @@
 server:
   port: 6060
-
-spring:   
-  datasource:
-    driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1522:xe
-    username: system
-    password: Mohit
   
+spring:
   application:
-    name: Tourist-Service
-    
-  jpa:
-    database-platform: org.hibernate.dialect.Oracle12cDialect
-    show-sql: true
-    hibernate: 
-       ddl-auto: update
+    name: TOURIST-SERVICE
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
